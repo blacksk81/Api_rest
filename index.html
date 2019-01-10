@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+        <!-- https://www.youtube.com/watch?v=lLsYjzpSDyA -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>json Api-rest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  </head>
+  <body>
+      <div class="container">
+          <div class="row">
+              <div class="col s12">
+                <h1>Mira la consola -></h1>
+                
+                <ul id="personas"></ul>
+              </div>
+          </div>
+      </div>   
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+    <script>
+      // var persona = {
+      //         "id": 1,
+      //         "name": "Leanne Graham",
+      //         "username": "Bret",
+      //         "email": "Sincere@april.biz",
+      // }
+
+      // var personas = [
+      //     {"nombre":"luis Alberto","nickname":"negrin"},
+      //     {"nombre":"juan Manuel","nickname":"oreja"},
+      //     {"nombre":"Luis Felipe","nickname":"Mojon"},
+      //     {"nombre":"Antonio joseph","nickname":"Grammpa"},
+      //     {"nombre":"humberto jose","nickname":"Sapote"},
+      //     {"nombre":"bricely Vanessa","nickname":"Bebe"}
+
+      // ];
+
+      //console.log(persona.name);
+      //console.log(personas[1].nombre);
+
+      // var salida = '';
+
+      // for(var i = 0; i < personas.length; i++ ){
+      //    // console.log(personas[i]);
+
+      //    //salida += '<li>'+personas[i].nombre+' es '+personas[i].nombre+'</li>';
+
+      //    //otra forma por interpolacion
+
+      //    salida += `<li>${personas[i].nombre} su nickname es ${personas[i].nickname}</li>`;
+      // }
+      // document.getElementById('personas').innerHTML = salida;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+               // document.getElementById("demo").innerHTML = xhttp.responseText;
+
+                var respuesta = JSON.parse(xhttp.responseText);
+                var personas = respuesta.personas;
+
+                var salida = '';
+                for(var i = 0; i < personas.length; i++){
+                    salida += `<li>${personas[i].nombre} su nick name es ${personas[i].nickname}</li>`;
+                }
+                document.getElementById('personas').innerHTML = salida ;
+            }
+        };
+         xhttp.open("GET", "personas.json", true);
+        // xhttp.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+        xhttp.send();
+
+    </script>
+  </body>
+</html>
